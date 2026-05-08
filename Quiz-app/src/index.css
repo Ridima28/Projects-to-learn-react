@@ -52,6 +52,14 @@ h2 {
   background: #90caf9;
   border: 2px solid #42a5f5;
 }
+.option.green{
+  background: #00ff73;
+  border: 2px solid #03a113;
+}
+.option.red{
+  background: #ff0000;
+  border: 2px solid #960101;
+}
 
 /* Navigation button styles */
 .nav-buttons {
