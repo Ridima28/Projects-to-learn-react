@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import {questionBank} from './questionBankList'
+
 export const Quiz = () => {
 
 
@@ -23,6 +24,16 @@ const handleNext =() =>{
     }
 
 }
+const handleRestart =() => {
+    setCurrentQuestion(0)
+    setOptionSelected("None")
+    setMessage("")
+    setIsSubmitted(false)
+    setScore(0)
+    setTotalQuestion(1)
+}
+
+
 const handlePrev =() =>{
     if (currentQuestion >0){
         setCurrentQuestion(currentQuestion - 1)
@@ -41,6 +52,7 @@ const handleSelectOption = (option) => {
 }
 
 const handleSubmit = () =>{
+    if (isSubmitted) return;
     setIsSubmitted(true)
     if (optionSelected === questionBank[currentQuestion].answer){
 
@@ -59,6 +71,10 @@ const handleSubmit = () =>{
 }   
     return (
     <div>
+        <button 
+        onClick = {handleRestart}
+        className = "restart-button"> Restart</button>
+        <h1> General Knowledge Quiz</h1>
         <div className = "score-and-question">
         <h2>Question {currentQuestion + 1}</h2>
         <p className = "score"> Score: {score}</p>
@@ -70,7 +86,7 @@ const handleSubmit = () =>{
             <button 
             key = {index}
             onClick = {()=> handleSelectOption(option)} className= {"option" + 
-            (optionSelected ===option? (isSubmitted ? (option==questionBank[currentQuestion].answer?" green":" red"): " selected"): "")}>
+            (optionSelected ===option? (isSubmitted ? (option===questionBank[currentQuestion].answer?" green":" red"): " selected"): "")}>
             {option}
         </button>
 
