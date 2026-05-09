@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import {questionBank} from './questionBankList'
+import { useNavigate } from 'react-router-dom'
 
 export const Quiz = () => {
-
+const navigateToEnd = useNavigate();
 
 const[optionSelected, setOptionSelected] = useState("None")
 const[message, setMessage] = useState("")
@@ -51,6 +52,18 @@ const handleSelectOption = (option) => {
     setOptionSelected(option);
 }
 
+
+
+const handleEnd = () => {
+    navigateToEnd('/end', {
+        state:{
+            score:score,
+            totalQuestion: questionBank.length
+        }
+    })
+}
+
+
 const handleSubmit = () =>{
     if (isSubmitted) return;
     if(optionSelected === "None"){
@@ -63,24 +76,29 @@ const handleSubmit = () =>{
     if (optionSelected === questionBank[currentQuestion].answer){
 
         setMessage("Correct Answer ✅")
-        setScore(score+1)
+        setScore(prev => prev+1)
         
     } else{
         setMessage( `Correct Answer is ${questionBank[currentQuestion].answer}`)
-        if(score>0){
-            setScore(score-1)
-        }else{
-            setScore(score)
-        }
+
+            setScore(prev => prev)
+        
     }
     }
     
 }   
     return (
     <div>
+        <div className = "end-and-restart">
         <button 
         onClick = {handleRestart}
         className = "restart-button"> Restart</button>
+        <button  
+        onClick = {handleEnd}
+        className='end-button'>
+            End Quiz
+        </button>
+        </div>
         <h1> General Knowledge Quiz</h1>
         <div className = "score-and-question">
         <h2>Question {currentQuestion + 1}</h2>

@@ -13,7 +13,6 @@ export default function WelcomePage() {
     <div>
         <h1> Welcome to general knowledge quiz </h1> 
         <button onClick = {handleStart} className = "welcome-button"> Test Your Knowledge Here !</button>
-        
     </div>
     )
 }
