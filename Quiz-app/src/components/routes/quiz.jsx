@@ -53,7 +53,13 @@ const handleSelectOption = (option) => {
 
 const handleSubmit = () =>{
     if (isSubmitted) return;
-    setIsSubmitted(true)
+    if(optionSelected === "None"){
+        setMessage("Please Select an option before submitting")
+
+    }
+    
+    else{
+        setIsSubmitted(true)
     if (optionSelected === questionBank[currentQuestion].answer){
 
         setMessage("Correct Answer ✅")
@@ -67,7 +73,8 @@ const handleSubmit = () =>{
             setScore(score)
         }
     }
-        
+    }
+    
 }   
     return (
     <div>
